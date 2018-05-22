@@ -18,6 +18,8 @@ services:
       image: postgres:10
       container_name: basse-postgres
       working_dir: /application
+      ports:
+        - "5432:5432"
       volumes:
         - .:/application
       environment:
@@ -63,3 +65,7 @@ services:
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+      links:
+        - postgres:postgres
+      depends_on:
+        - postgres
